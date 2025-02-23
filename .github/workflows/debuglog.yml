@@ -1,15 +1,11 @@
-name: Debug log
+name: Log group
 on: push
-
-defaults:
-  run:
-    shell: bash
 
 jobs:
   log:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          set -x
-          date
-          hostname
+          echo "::group::Show environment variables"
+          printenv
+          echo "::endgroup::"
