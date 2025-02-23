@@ -1,13 +1,12 @@
-name: Job summaries
+name: Matrix
 on: push
 
 jobs:
-  log:
-    runs-on: ubuntu-latest
+  print:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
     steps:
-      - run: |
-          cat <<EOF >> "${GITHUB_STEP_SUMMARY}"
-          ## Example Title :rocket:
-          - first line
-          - second line
-          EOF
+      - run: echo "${RUNNER_OS}"
+        shell: bash
