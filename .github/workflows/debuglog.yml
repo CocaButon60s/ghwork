@@ -1,4 +1,4 @@
-name: Log group
+name: Job summaries
 on: push
 
 jobs:
@@ -6,6 +6,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo "::error::This is an error"
-          echo "::warning::This is a warning"
-          echo "::notice::This is a notice"
+          echo "## Example Title :rocket:" >> "${GITHUB_STEP_SUMMARY}"
+          echo "-first line" >> "${GITHUB_STEP_SUMMARY}"
+          echo "-second line" >> "${GITHUB_STEP_SUMMARY}"
