@@ -1,20 +1,19 @@
-name: Environments
-on:
-  workflow_dispatch:
-    inputs:
-      environment-name:
-        type: environment
-        default: test
-        required: false
-        description: Environment name
-
+name: Cache
+on: push
 jobs:
-  print:
+  cache:
     runs-on: ubuntu-latest
-    environment: ${{ inputs.environment-name }}
-    env:
-      USERNAME: ${{ vars.USERNAME}}
-      PASSWORD: ${{ secrets.PASSWORD }}
     steps:
-      - run: echo "${USERNAME}"
-      - run: echo "${PASSWORD:0:1}${PASSWORD#?}"
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
+        with:
+          key: test-${{ runner.os }}-${{ github.sha }}
+          path: ${{ github.workspace }}/dummy
+          restore-keys: |
+            test-${{ runner.os }}-
+
+      - run: |
+          if [ ! -d ${{ github.workspace }}/dummy ]; then exit0; fi
+          dd if=/dev/urandom of="${GITHUB_WORKSPACE}/dummy" bs=1M count=10
+          sleep 30
+      - run: ls -lh "${GITHUB_WORKSPACE}/dummy"
