@@ -13,7 +13,7 @@ jobs:
             test-${{ runner.os }}-
 
       - run: |
-          if [ ! -d ${{ github.workspace }}/dummy ]; then exit 0; fi
+          if [[ -f "${GITHUB_WORKSPACE}/dummy" ]]; then exit 0; fi
           dd if=/dev/urandom of="${GITHUB_WORKSPACE}/dummy" bs=1M count=10
           sleep 30
       - run: ls -lh "${GITHUB_WORKSPACE}/dummy"
