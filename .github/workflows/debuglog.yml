@@ -4,9 +4,8 @@ on: push
 jobs:
   log:
     runs-on: ubuntu-latest
-    env:
-      PASSWORD: SuperSecretValue
     steps:
       - run: |
-          echo "::add-mask::${PASSWORD}"
-          echo "${PASSWORD}"
+          echo "::error::This is an error"
+          echo "::warning::This is a warning"
+          echo "::notice::This is a notice"
