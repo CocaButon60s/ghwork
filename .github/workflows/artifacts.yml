@@ -17,5 +17,6 @@ jobs:
           dbid=$(gh run list --workflow artifacts.yml --json databaseId --jq .'[1].databaseId')
           echo $dbid
           gh run download $dbid --name uploaded --dir .
+          cat date.txt
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
