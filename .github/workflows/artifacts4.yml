@@ -1,4 +1,4 @@
-name: Artifacts3
+name: Artifacts4
 on: push
 jobs:
   downloads:
@@ -6,7 +6,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: |
-          dbid=$(gh run list --workflow artifacts2.yml --json databaseId --jq .'[1].databaseId')
+          dbid=$(gh run list --workflow artifacts4.yml --json databaseId --jq .'[1].databaseId')
           echo $dbid
           gh run download $dbid --name uploaded --dir .
           cat date.txt
