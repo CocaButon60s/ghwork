@@ -12,6 +12,7 @@ jobs:
   downloads:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - run: |
           # echo "${GITHUB_TOKEN}" | gh auth login --with-token
           dbid=$(gh run list --workflow artifacts.yml --json databaseId --jq .'[0].databaseId')
