@@ -14,8 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: |
-          # echo "${GITHUB_TOKEN}" | gh auth login --with-token
-          dbid=$(gh run list --workflow artifacts.yml --json databaseId --jq .'[0].databaseId')
+          dbid=$(gh run list --workflow artifacts.yml --json databaseId --jq .'[1].databaseId')
           echo $dbid
           gh run download $dbid --name uploaded --dir .
         env:
