@@ -1,13 +1,11 @@
-name: Fail-fast matrix
-on: push
+name: Flow control
+on: workflow_dispatch
 jobs:
   run:
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        time: [10, 20, 30]
     steps:
-      - run: sleep "${SLEEP_TIME}" && exit 1
-        env:
-          SLEEP_TIME: ${{ matrix.time }}
+      - run: exit "$(( RANDOM % 2 ))"
+      - run: exit 1
+        id: error
+      - run: echo "Catch error step"
+        if: ${{ failure() && steps.error.outcome == 'failure' }}
