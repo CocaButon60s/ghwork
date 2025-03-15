@@ -1,5 +1,10 @@
 name: Flow control
 on: workflow_dispatch
+
+permissions:
+  contents: read
+  packages: read
+
 jobs:
   run:
     runs-on: ubuntu-latest
