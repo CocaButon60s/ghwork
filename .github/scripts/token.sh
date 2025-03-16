@@ -16,7 +16,9 @@ exp="$((now + (3 * 60)))"
 template='{"iss":"%s","iat":%s,"exp":%s}'
 payload="$(printf "${template}" "${APP_ID}" "${iat}" "${exp}" | base64url)"
 signature="$(printf '%s' "${header}.${payload}" | sign | base64url)"
+echo "::add-mask::${signature}" # ログマスク
 jwt="${header}.${payload}.${signature}"
+echo "::add-mask::${jwt}" # ログマスク
 
 # Installation APIの実行
 repo="${GITHUB_REPOSITORY_OWNER}/${TARGET_REPO}"
@@ -40,4 +42,5 @@ token="$(curl \
 	--header "Authorization: Bearer ${jwt}" \
 	--data "$(printf '{"repositories":["%s"]}' "${TARGET_REPO}")" | jq -r '.token')"
 
+echo "::add-mask::${token}" # ログマスク
 echo "token=${token}" >>"${GITHUB_OUTPUT}"
