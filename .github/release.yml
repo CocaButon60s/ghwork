@@ -1,9 +1,9 @@
 changelog:
   categories:
-    - title: Enhancement
+    - title: 新機能
       labels:
         - enhancement
-    - title: Bug Fixes
+    - title: バグ修正
       labels:
         - bug
         - fixes
